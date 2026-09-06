@@ -1,15 +1,18 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+import { Navigate, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Layout from "./components/Layout";
+import SignUp from "./pages/auth/SignUp";
+import SignIn from "./pages/auth/SignIn";
+import { useAuthContext } from "./context/AuthContext";
 
-function App() {
-
+export default function App() {
+  const { loggedInUser } = useAuthContext()
+  
   return (
-    <main className='flex items-center justify-center bg-red-500'>
-      Hello
-    </main>
+    <Routes>
+      <Route path="/" element={loggedInUser ? <Layout><Home/></Layout> : <Navigate to="/login" replace/>}/>
+      <Route path="/register" element={loggedInUser ? <Navigate to="/" replace/> : <Layout><SignUp/></Layout>}/>
+      <Route path="/login" element={loggedInUser ? <Navigate to="/" replace/> : <Layout><SignIn/></Layout>}/>
+    </Routes>
   )
 }
-
-export default App
