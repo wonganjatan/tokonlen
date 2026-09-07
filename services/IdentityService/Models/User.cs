@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 namespace IdentityService.Models;
 
 public enum Role {
-    USER,
-    ADMIN
+    User,
+    Admin
 }
 
 [Index(nameof(Username), IsUnique = true)]

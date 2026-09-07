@@ -21,7 +21,7 @@ public static class SeedData
             Username = "admin",
             Email = "admin@email.com",
             PasswordHash = hashedPassword,
-            Role = Role.ADMIN,
+            Role = Role.Admin,
         };
 
         context.Add(admin);

@@ -1,7 +1,7 @@
-export type Role = "ADMIN" | "USER"
+export type Role = "User" | "Admin"
 
 export interface User {
-    id: number
+    userId: number
     firstName: string
     lastName: string
     username: string
