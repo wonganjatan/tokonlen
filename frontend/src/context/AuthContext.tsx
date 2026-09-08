@@ -1,12 +1,12 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import type { CreateUserInput, User } from "../types/User";
+import React, { createContext, useContext, useState } from "react";
+import type { User } from "../types/User";
 import { authApi } from "../api/auth";
 import { useNavigate } from "react-router-dom";
-import type { AuthResponse } from "../types/Auth";
+import type { AuthResponse, SignUpForm } from "../types/Auth";
 
 interface AuthContextType {
     loggedInUser: User | null
-    signUp: (input: CreateUserInput) => Promise<void>
+    signUp: (input: SignUpForm) => Promise<void>
     signIn: (email: string, password: string) => Promise<User>
     signOut: () => void
 }
@@ -17,20 +17,7 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null)
     const navigate = useNavigate()
 
-    useEffect(() => {
-        if (loggedInUser == null) {
-            navigate("/")
-        }
-        
-        const user = localStorage.getItem("user")
-        const token = localStorage.getItem("token")
-
-        if (user && token) {
-            setLoggedInUser(JSON.parse(user))
-        }
-    })
-
-    async function signUp(input: CreateUserInput): Promise<void> {
+    async function signUp(input: SignUpForm): Promise<void> {
         await authApi.register(input)
     }
 
