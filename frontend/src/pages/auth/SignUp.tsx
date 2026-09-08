@@ -17,8 +17,7 @@ export default function SignUp() {
 
     const onSubmit = async (data: SignUpForm) => {
         try {
-            const { confirmPassword, ...input } = data
-            await signUp(input)
+            await signUp(data)
             navigate("/login")  
         } catch (error) {
             setError("root", { message: "Sign up failed. Please try again" })
@@ -110,8 +109,8 @@ export default function SignUp() {
                             {...register("password", {
                                 required: "Password is required",
                                 minLength: {
-                                    value: 6,
-                                    message: "Password must be at least 6 characters"
+                                    value: 8,
+                                    message: "Password must be at least 8 characters"
                                 },
                                 pattern: {
                                     value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&()_+\-=[\]{};':"\\|,.<>/?]).+$/,
