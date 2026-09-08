@@ -50,4 +50,11 @@ public class AuthController : ControllerBase
             Token = token        
         });
     }
+
+    [HttpPost]
+    [Route("register")]
+    public async Task SignUp(UserSignUpDto dto)
+    {
+        await _authService.SignUpAsync(dto);
+    }
 }
