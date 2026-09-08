@@ -11,14 +11,17 @@ public class AuthController : ControllerBase
 {
     private readonly ILogger<AuthController> _logger;
     private readonly IAuthService _authService;
+    private readonly IJwtService _jwtService;
 
     public AuthController(
         ILogger<AuthController> logger,
-        IAuthService authService
+        IAuthService authService,
+        IJwtService jwtService
     )
     {
         _logger = logger;
         _authService = authService;
+        _jwtService = jwtService;
     }
 
     [HttpPost]
@@ -33,6 +36,18 @@ public class AuthController : ControllerBase
             return Unauthorized("Invalid email or password");
         }
 
-        return Ok(new { message = "Signed in successfully"});
+        var token = _jwtService.GenerateToken(user);
+
+        return Ok(new AuthResponseDto
+        {
+            UserId = user.UserId,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Username = user.Username,
+            Email = user.Email,
+            Role = user.Role,
+            CreatedAt = user.CreatedAt,
+            Token = token        
+        });
     }
 }
