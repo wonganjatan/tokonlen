@@ -37,4 +37,20 @@ public class AuthService : IAuthService
         _logger.LogInformation("Sign in successful");
         return user;
     }
+
+    public async Task SignUpAsync(UserSignUpDto dto)
+    {
+        var hashedPassword = BCrypt.Net.BCrypt.HashPassword(dto.Password);
+        
+        var user = new User {
+            FirstName = dto.FirstName,
+            LastName = dto.LastName,
+            Username = dto.Username,
+            Email = dto.Email,
+            PasswordHash = hashedPassword,
+            Role = Role.User
+        };
+
+        await _userRepository.CreateAsync(user);
+    }
 }

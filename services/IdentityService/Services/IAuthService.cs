@@ -6,4 +6,5 @@ namespace IdentityService.Services;
 public interface IAuthService
 {
     Task<User?> SignInAsync(UserSignInDto dto);
+    Task SignUpAsync(UserSignUpDto dto);
 }
