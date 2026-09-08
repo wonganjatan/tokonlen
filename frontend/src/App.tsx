@@ -6,7 +6,11 @@ import SignIn from "./pages/auth/SignIn";
 import { useAuthContext } from "./context/AuthContext";
 
 export default function App() {
-  const { loggedInUser } = useAuthContext()
+  const { loggedInUser, loading } = useAuthContext()
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
   
   return (
     <Routes>
