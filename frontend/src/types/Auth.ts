@@ -1,3 +1,5 @@
+import type { User } from "./User"
+
 export interface SignInForm {
     email: string
     password: string
@@ -10,4 +12,9 @@ export interface SignUpForm {
     email: string
     password: string
     confirmPassword: string
+}
+
+export interface AuthResponse {
+    user: User
+    token: string
 }
