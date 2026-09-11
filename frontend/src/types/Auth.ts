@@ -15,6 +15,12 @@ export interface SignUpForm {
 }
 
 export interface AuthResponse {
-    user: User
+    userId: number
+    firstName: string
+    lastName: string
+    username: string
+    email: string
+    role: "User" | "Admin"
+    createdAt: Date
     token: string
 }
