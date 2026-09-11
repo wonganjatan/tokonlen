@@ -24,18 +24,48 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
         const user = localStorage.getItem("user")
 
         if (token && user) {
-            setLoggedInUser(JSON.parse(user))
+            try {
+                const parsedUser: User = JSON.parse(user)
+                setLoggedInUser(parsedUser)
+            } catch (error) {
+                console.error("Invalid user")
+
+                localStorage.removeItem("token")
+                localStorage.removeItem("user")
+                setLoggedInUser(null)
+            }
         }
 
         setLoading(false)
-    }, [loggedInUser])
+    }, [])
 
     async function signUp(input: SignUpForm): Promise<void> {
         await authApi.register(input)
     }
 
     async function signIn(email: string, password: string): Promise<User> {
-        const { user, token }: AuthResponse =  await authApi.login(email, password)
+        const res =  await authApi.login(email, password)
+        
+        const {
+            userId,
+            firstName,
+            lastName,
+            username,
+            email: userEmail,
+            role,
+            createdAt,
+            token
+        } = res
+
+        const user: User = {
+            userId,
+            firstName,
+            lastName,
+            username,
+            email: userEmail,
+            role,
+            createdAt,
+        }
 
         localStorage.setItem("token", token)
         localStorage.setItem("user", JSON.stringify(user))

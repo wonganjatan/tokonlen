@@ -17,7 +17,6 @@ export default function SignIn() {
     const onSubmit = async (data: SignInForm) => {
         try {
             await signIn(data.email, data.password)
-            navigate("/")
         } catch (error) {
             setError("root", { message: "Sign in failed. Please try again" })
         }
