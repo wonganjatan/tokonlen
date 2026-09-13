@@ -1,5 +1,3 @@
-import type { User } from "./User"
-
 export interface SignInForm {
     email: string
     password: string
