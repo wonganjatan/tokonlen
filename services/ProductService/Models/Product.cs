@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
+namespace ProductService.Models;
+
 public class Product
 
 {

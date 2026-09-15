@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ProductService.Models;
 
 public class ProductServiceContext : DbContext
 {
