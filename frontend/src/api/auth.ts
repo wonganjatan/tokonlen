@@ -1,5 +1,5 @@
+import axios from "axios";
 import type { AuthResponse, SignUpForm } from "../types/Auth";
-import axios from "./axios";
 
 export const authApi = {
   register: async (input: SignUpForm): Promise<void> => {
