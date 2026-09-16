@@ -1,13 +1,17 @@
 import axios from "axios";
 import type { AuthResponse, SignUpForm } from "../types/Auth";
 
+const api = axios.create({
+  baseURL: import.meta.env.VITE_IDENTITY_SERVICE_PORT || "http://localhost:5000/api"
+})
+
 export const authApi = {
   register: async (input: SignUpForm): Promise<void> => {
-    await axios.post<void>("/auth/register", input);
+    await api.post<void>("/auth/register", input);
   },
 
   login: async (email: string, password: string): Promise<AuthResponse> => {
-    const res = await axios.post<AuthResponse>("/auth/login", { email, password })
+    const res = await api.post<AuthResponse>("/auth/login", { email, password })
     return res.data
   }
 };
