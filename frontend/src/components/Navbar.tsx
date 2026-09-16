@@ -8,11 +8,14 @@ export default function Navbar() {
             <h1 className="text-white text-2xl">Tokonlen</h1>
             {loggedInUser ? (
                 <div className="flex gap-4">
-                    <Link to="/about" className="flex flex-col text-white border-2 border-transparent hover:border-b-red-500 transition-colors duration-300">
-                        About
-                    </Link>
-                    <Link to="/" className="flex flex-col text-white border-2 border-transparent hover:border-b-yellow-500 transition-colors duration-300">
+                    <Link to="/" className="flex flex-col text-white border-2 border-transparent hover:border-b-blue-500 transition-colors duration-300">
                         Home
+                    </Link>
+                    <Link to="/products" className="flex flex-col text-white border-2 border-transparent hover:border-b-red-500 transition-colors duration-300">
+                        Products
+                    </Link>
+                    <Link to="/orders" className="flex flex-col text-white border-2 border-transparent hover:border-b-yellow-500 transition-colors duration-300">
+                        Orders
                     </Link>
                     <button onClick={signOut} className="text-white border-2 border-transparent hover:border-b-green-500 transition-colors duration-300 cursor-pointer">
                         Sign Out
