@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import type { Product } from "../../types/Product"
 import { productsApi } from "../../api/products"
+import ProductCard from "../../components/ProductCard"
 
 export default function Products() {
     const [products, setProducts] = useState<Product[] | null>(null)
@@ -26,11 +27,9 @@ export default function Products() {
     }
 
     return (
-        <div>
+        <div className="grid grid-cols-2 gap-5">            
             {products?.map(product => (
-                <div key={product.productId}>
-                    <p>{product.name}</p>
-                </div>
+                <ProductCard key={product.productId} product={product}/>
             ))}
         </div>
     )
