@@ -1,9 +1,8 @@
-import axios from "axios";
 import type { Product } from "../types/Product";
+import { authMiddleware } from "../middlewares/authMiddleware";
 
-const api = axios.create({
-    baseURL: import.meta.env.VITE_PRODUCT_SERVICE_PORT || "http://localhost:5001/api"
-})
+const baseURL = import.meta.env.VITE_PRODUCT_SERVICE_PORT || "http://localhost:5001/api"
+const api = authMiddleware(baseURL)
 
 export const productsApi = {
     getAll: async (): Promise<Product[]> => {

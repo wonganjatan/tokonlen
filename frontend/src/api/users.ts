@@ -1,9 +1,8 @@
-import axios from "axios";
 import type { User } from "../types/User";
+import { authMiddleware } from "../middlewares/authMiddleware";
 
-const api = axios.create({
-  baseURL: import.meta.env.VITE_IDENTITY_SERVICE_PORT || "http://localhost:5000/api"
-})
+const baseURL = import.meta.env.VITE_IDENTITY_SERVICE_PORT || "http://localhost:5000/api"
+const api = authMiddleware(baseURL)
 
 export const usersApi = {
   getAllUsers: async (): Promise<User[]> => {
