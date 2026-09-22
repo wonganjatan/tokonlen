@@ -18,10 +18,24 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Product>>> GetAllAsync()
+    public async Task<ActionResult<List<Product>>> FindAllAsync()
     {
-        var products = await _productService.GetAllAsync();
+        var products = await _productService.FindAllAsync();
 
         return products;
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<Product>> FindByIdAsync(int id)
+    {
+        var product = await _productService.FindByIdAsync(id);
+
+        if (product == null)
+        {
+            _logger.LogWarning("Product not found");
+            return NotFound();
+        }
+
+        return Ok(product);
     }
 }
