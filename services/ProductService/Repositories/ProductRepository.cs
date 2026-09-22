@@ -18,4 +18,17 @@ public class ProductRepository : IProductRepository
 
         return products;
     }
+
+    public async Task<Product?> FindByIdAsync(int id)
+    {
+        var product = await _context.Products.FindAsync(id);
+
+        if (product == null)
+        {
+            _logger.LogWarning("Product not found");
+            return null;
+        }
+
+        return product;
+    }
 }
