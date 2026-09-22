@@ -13,8 +13,13 @@ public class ProductService : IProductService
         _logger = logger;
         _productRepository = productRepository;
     }
-    public async Task<List<Product>> GetAllAsync()
+    public async Task<List<Product>> FindAllAsync()
     {
         return await _productRepository.FindAllAsync();
+    }
+
+    public async Task<Product?> FindByIdAsync(int id)
+    {
+        return await _productRepository.FindByIdAsync(id);
     }
 }
