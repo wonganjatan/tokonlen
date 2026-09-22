@@ -9,5 +9,10 @@ export const productsApi = {
     getAll: async (): Promise<Product[]> => {
         const res = await api.get<Product[]>("/products")
         return res.data
+    },
+
+    getById: async (id: number): Promise<Product> => {
+        const res = await api.get<Product>(`/products/${id}`)
+        return res.data
     }
 }
