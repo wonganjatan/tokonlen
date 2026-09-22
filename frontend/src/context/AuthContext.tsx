@@ -43,7 +43,7 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
         await authApi.register(input)
     }
 
-    async function signIn(email: string, password: string): Promise<User> {
+    async function signIn(email: string, password: string): Promise<AuthResponse> {
         const res =  await authApi.login(email, password)
         
         const {
@@ -71,7 +71,7 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
         localStorage.setItem("user", JSON.stringify(user))
 
         setLoggedInUser(user)
-        return user
+        return res
     }
 
     function signOut(): void {
