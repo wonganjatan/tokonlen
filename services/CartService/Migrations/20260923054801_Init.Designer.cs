@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CartService.Migrations
 {
     [DbContext(typeof(CartServiceContext))]
-    [Migration("20260923022813_Init")]
+    [Migration("20260923054801_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -39,8 +39,16 @@ namespace CartService.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("numeric");
 
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
