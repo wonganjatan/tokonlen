@@ -1,6 +1,8 @@
 using CartService.Data;
 using CartService.Dtos;
 using CartService.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CartService.Repositories;
 
@@ -15,7 +17,17 @@ public class CartRepository : ICartRepository
         _context = context;
     }
 
-    public async Task<CartItem> Create(CreateCartItemDto dto)
+    [HttpGet]
+    public async Task<List<CartItem>> FindAllAsync()
+    {
+        var list = await _context.CartItems.ToListAsync();
+        _logger.LogInformation("List of CartItem fetched");
+
+        return list;
+    }
+
+    [HttpPost]
+    public async Task<CartItem> CreateAsync(CreateCartItemDto dto)
     {
         var item = new CartItem
         {

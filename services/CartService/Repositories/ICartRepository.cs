@@ -5,5 +5,6 @@ namespace CartService.Repositories;
 
 public interface ICartRepository
 {
-    Task<CartItem> Create(CreateCartItemDto dto);
+    Task<List<CartItem>> FindAllAsync();
+    Task<CartItem> CreateAsync(CreateCartItemDto dto);
 }
