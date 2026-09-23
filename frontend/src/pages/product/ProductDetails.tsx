@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import type { Product } from "../../types/Product"
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { productsApi } from "../../api/products"
 import { useForm } from "react-hook-form"
 import type { CartItemRequest } from "../../types/Cart"
@@ -10,6 +10,7 @@ export default function ProductDetails() {
     const { id } = useParams()
     const [product, setProduct] = useState<Product | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (!id) {
@@ -44,7 +45,8 @@ export default function ProductDetails() {
 
     const addToCart = async (request: CartItemRequest) => {
         try {
-            await cartsApi.create(request)
+            await cartsApi.create({...request, productId: Number(product?.productId)})
+            navigate("/products")
         } catch (error) {
             console.error(error)
             setError("root", { message: "Failed to add product to the cart. Please try again" })
