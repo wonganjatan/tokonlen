@@ -35,8 +35,16 @@ public class CartController : ControllerBase
         return userId;
     }
 
+    [HttpGet]
+    public async Task<ActionResult<List<CartItem>>> FindAll()
+    {
+        var list = await _cartService.FindAllAsync();
+
+        return list;
+    }
+
     [HttpPost]
-    public async Task<ActionResult<CartItem>> Create(AddToCartDto dto)
+    public async Task<ActionResult<CartItem>> CreateAsync(AddToCartDto dto)
     {
         var userId = GetUserId();
 
@@ -47,7 +55,7 @@ public class CartController : ControllerBase
             Quantity = dto.Quantity
         };
 
-        var item = await _cartService.Create(newItem);
+        var item = await _cartService.CreateAsync(newItem);
         _logger.LogInformation("Item is added to the cart");
         
         return Ok(item);
