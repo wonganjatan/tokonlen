@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProductService.Models;
 using ProductService.Services;
@@ -6,6 +7,7 @@ namespace ProductService.Controllers;
 
 [ApiController]
 [Route("/api/[controller]s")]
+[Authorize]
 public class ProductController : ControllerBase
 {
     private readonly ILogger<ProductController> _logger;
