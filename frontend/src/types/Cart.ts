@@ -1,6 +1,6 @@
 export interface CartItemResponse {
-    cartItemId: string
-    userId: string
+    cartItemId: number
+    userId: number
     productId: number
     quantity: number
     createdAt: string

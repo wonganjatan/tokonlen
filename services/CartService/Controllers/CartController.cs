@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CartService.Controllers;
 
 [ApiController]
-[Route("api/[controller]s")]
+[Route("api/[controller]")]
 [Authorize]
 public class CartController : ControllerBase
 {
@@ -36,11 +36,12 @@ public class CartController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<CartItem>>> FindAll()
+    public async Task<ActionResult<List<CartItem>>> FindByUserIdAsync()
     {
-        var list = await _cartService.FindAllAsync();
+        var userId = GetUserId();
+        var cart = await _cartService.FindByUserIdAsync(int.Parse(userId));
 
-        return list;
+        return cart;
     }
 
     [HttpPost]
