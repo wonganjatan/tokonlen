@@ -10,7 +10,7 @@ public class CartServiceContext : DbContext
         
     }
 
-    DbSet<CartItem> CartItems { get; set; }
+    public DbSet<CartItem> CartItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
