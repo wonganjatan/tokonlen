@@ -22,7 +22,19 @@ services:
       - "5433:5432"
     volumes:
       - product-data:/var/lib/postgresql/data
+  cart-db:
+    image: postgres:17
+    container_name: cart-db
+    environment:
+      POSTGRES_DB: cartb
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5434:5432"
+    volumes:
+      - cart-data:/var/lib/postgresql/data
 
 volumes:
   identity-data:
   product-data:
+  cart-data:
