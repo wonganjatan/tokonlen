@@ -14,8 +14,8 @@ export default function Navbar() {
                     <Link to="/products" className="flex flex-col text-white border-2 border-transparent hover:border-b-red-500 transition-colors duration-300">
                         Products
                     </Link>
-                    <Link to="/carts" className="flex flex-col text-white border-2 border-transparent hover:border-b-yellow-500 transition-colors duration-300">
-                        Carts
+                    <Link to="/cart" className="flex flex-col text-white border-2 border-transparent hover:border-b-yellow-500 transition-colors duration-300">
+                        Cart
                     </Link>
                     <Link to="/orders" className="flex flex-col text-white border-2 border-transparent hover:border-b-yellow-500 transition-colors duration-300">
                         Orders
