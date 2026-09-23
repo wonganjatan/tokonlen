@@ -15,8 +15,8 @@ public class CartService : ICartService
         _cartRepository = cartRepository;
     }
 
-    public async Task<CartItem> Create(CreateCartItemDto dto)
+    public async Task<CartItem> CreateAsync(CreateCartItemDto dto)
     {
-        return await _cartRepository.Create(dto);
+        return await _cartRepository.CreateAsync(dto);
     }
 }
