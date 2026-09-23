@@ -15,14 +15,18 @@ public class CartService : ICartService
         _cartRepository = cartRepository;
     }
 
-    public async Task<List<CartItem>> FindAllAsync()
+    public async Task<List<CartItem>> FindByUserIdAsync(int userId)
     {
-        return await _cartRepository.FindAllAsync();
+        var cartItem = await _cartRepository.FindByUserIdAsync(userId);
+        
+        return cartItem;
     }
 
     public async Task<CartItem> CreateAsync(CreateCartItemDto dto)
     {
-        return await _cartRepository.CreateAsync(dto);
+        var cartItem =  await _cartRepository.CreateAsync(dto);
+        
+        return cartItem;
     }
 
     

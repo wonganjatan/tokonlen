@@ -5,6 +5,6 @@ namespace CartService.Services;
 
 public interface ICartService
 {
-    Task<List<CartItem>> FindAllAsync();
+    Task<List<CartItem>> FindByUserIdAsync(int userId);
     Task<CartItem> CreateAsync(CreateCartItemDto dto);
 }
