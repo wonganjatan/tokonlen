@@ -6,12 +6,12 @@ const api = authMiddleware(baseURL)
 
 export const cartsApi = {
     getAll: async (): Promise<CartItemResponse[]> => {
-        const res = await api.get<CartItemResponse[]>("/carts")
+        const res = await api.get<CartItemResponse[]>("/cart")
         return res.data
     },
 
     create: async (request: CartItemRequest): Promise<CartItemResponse> => {
-        const res = await api.post<CartItemResponse>("/carts", request)
+        const res = await api.post<CartItemResponse>("/cart", request)
         return res.data
     }
 }
