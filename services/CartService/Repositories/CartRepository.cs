@@ -17,12 +17,12 @@ public class CartRepository : ICartRepository
         _context = context;
     }
 
-    public async Task<List<CartItem>> FindAllAsync()
+    public async Task<List<CartItem>> FindByUserIdAsync(int userId)
     {
-        var list = await _context.CartItems.ToListAsync();
-        _logger.LogInformation("List of CartItem fetched");
+        var items = await _context.CartItems.Where(ci => ci.UserId == userId).ToListAsync();
+        _logger.LogInformation("Cart of UserId {userId} is fetched", userId);
 
-        return list;
+        return items;
     }
 
     public async Task<CartItem> CreateAsync(CreateCartItemDto dto)
