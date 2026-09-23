@@ -17,7 +17,6 @@ public class CartRepository : ICartRepository
         _context = context;
     }
 
-    [HttpGet]
     public async Task<List<CartItem>> FindAllAsync()
     {
         var list = await _context.CartItems.ToListAsync();
@@ -26,7 +25,6 @@ public class CartRepository : ICartRepository
         return list;
     }
 
-    [HttpPost]
     public async Task<CartItem> CreateAsync(CreateCartItemDto dto)
     {
         var item = new CartItem
