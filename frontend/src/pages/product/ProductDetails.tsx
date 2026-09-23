@@ -3,13 +3,12 @@ import type { Product } from "../../types/Product"
 import { Link, useParams } from "react-router-dom"
 import { productsApi } from "../../api/products"
 import { useForm } from "react-hook-form"
-import type { CartItemResponse, CartItemRequest } from "../../types/Cart"
+import type { CartItemRequest } from "../../types/Cart"
 import { cartsApi } from "../../api/carts"
 
 export default function ProductDetails() {
     const { id } = useParams()
     const [product, setProduct] = useState<Product | null>(null)
-    const [cart, setCart] = useState<CartItemResponse[] | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
 
     useEffect(() => {
@@ -45,8 +44,7 @@ export default function ProductDetails() {
 
     const addToCart = async (request: CartItemRequest) => {
         try {
-            const newItem = await cartsApi.create(request)
-            setCart(prev => [...prev ?? [], newItem])
+            await cartsApi.create(request)
         } catch (error) {
             console.error(error)
             setError("root", { message: "Failed to add product to the cart. Please try again" })
@@ -126,17 +124,6 @@ export default function ProductDetails() {
                     </div>
                     {errors.root && <p className="text-red-500 text-xs mt-1">{errors.root.message}</p>}
                 </form>
-            </div>
-            <div>
-                {cart?.map(item => (
-                    <div key={item.cartItemId}>
-                        <p>{item.cartItemId}</p>
-                        <p>{item.userId}</p>
-                        <p>{item.productId}</p>
-                        <p>{item.quantity}</p>
-                        <p>{new Date(item.createdAt).toLocaleDateString()}</p>
-                    </div>
-                ))}
             </div>
         </div>
     )
