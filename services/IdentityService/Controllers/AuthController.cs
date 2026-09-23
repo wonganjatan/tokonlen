@@ -1,4 +1,3 @@
-using IdentityService.Data;
 using IdentityService.Dtos;
 using IdentityService.Services;
 using Microsoft.AspNetCore.Mvc;
