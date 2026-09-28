@@ -33,8 +33,21 @@ services:
       - "5434:5432"
     volumes:
       - cart-data:/var/lib/postgresql/data
+  
+  order-db:
+    image: postgres:17
+    container_name: order-db
+    environment:
+      POSTGRES_DB: orderdb
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5435:5432"
+    volumes:
+      - order-data:/var/lib/postgresql/data
 
 volumes:
   identity-data:
   product-data:
   cart-data:
+  order-data:
