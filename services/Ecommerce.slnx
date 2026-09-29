@@ -2,4 +2,5 @@
   <Project Path="IdentityService/IdentityService.csproj" />
   <Project Path="ProductService/ProductService.csproj" />
   <Project Path="CartService/CartService.csproj" />
+  <Project Path="OrderService/OrderService.csproj" />
 </Solution>
