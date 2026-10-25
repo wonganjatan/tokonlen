@@ -23,7 +23,7 @@ export default function App() {
       <Route path="/products" element={loggedInUser ? <Layout><Products/></Layout> : <Navigate to="/login" replace/>}/>
       <Route path="/products/:id" element={loggedInUser ? <Layout><ProductDetails/></Layout> : <Navigate to="/login" replace/>}/>
       <Route path="/cart" element={loggedInUser ? <Layout><Cart/></Layout> : <Navigate to="/login" replace/>}/>
-      {/* <Route path="/orders" element={loggedInUser ? <Navigate to="/" replace/> : <Layout><Products/></Layout>}/> */}
+      <Route path="/orders" element={loggedInUser ? <Navigate to="/" replace/> : <Layout><Products/></Layout>}/>
     </Routes>
   )
 }
