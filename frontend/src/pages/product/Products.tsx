@@ -27,10 +27,15 @@ export default function Products() {
     }
 
     return (
-        <div className="grid grid-cols-2 gap-5">            
-            {products?.map(product => (
-                <ProductCard key={product.productId} product={product}/>
-            ))}
+        <div className="mx-auto max-w-6xl px-6 py-10">
+            <h1 className="mb-8 text-3xl font-extrabold tracking-tight text-[#2b1fa8]">
+                Products
+            </h1>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {products?.map(product => (
+                    <ProductCard key={product.productId} product={product} />
+                ))}
+            </div>
         </div>
     )
 }
