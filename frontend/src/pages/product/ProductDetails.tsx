@@ -62,70 +62,79 @@ export default function ProductDetails() {
     }
 
     return (
-        <div className="mx-auto max-w-3xl px-6 py-10">
-            <Link to="/products" className="text-sm text-zinc-400 hover:text-zinc-200">
-                ← Back to catalog
+        <div className="mx-auto max-w-5xl px-6 py-10">
+            <Link
+                to="/products"
+                className="text-sm font-semibold text-[#503cfa] underline-offset-4 hover:underline"
+            >
+                ← Back to products
             </Link>
 
-            <div
-                className="mt-4 flex aspect-video items-center justify-center bg-linear-to-br from-amber-400 to-amber-700 text-6xl font-bold text-zinc-950"
-                aria-hidden="true"
-            >
-                {product.name.charAt(0)}
-            </div>
-
-            <div className="mt-6">
-                <span className="text-xs font-semibold text-amber-400">
-                    {product.category}
-                </span>
-                <h1 className="mt-1 text-2xl font-semibold tracking-tight text-zinc-100">
-                    {product.name}
-                </h1>
-                <p className="mt-3 text-sm leading-relaxed text-zinc-400">
-                    {product.description}
-                </p>
-
-                <div className="mt-6 flex items-center justify-between border-t border-zinc-800 pt-4">
-                    <span className="text-2xl font-bold text-zinc-100">
-                        ${product.price.toFixed(2)}
-                    </span>
+            <div className="mt-6 grid gap-8 md:grid-cols-2">
+                <div
+                    className="flex aspect-4/3 items-center justify-center rounded-xl border border-slate-200 bg-[#eeecff] text-8xl font-extrabold text-[#503cfa]/40"
+                    aria-hidden="true"
+                >
+                    {product.name.charAt(0)}
                 </div>
 
-                <form onSubmit={handleSubmit(addToCart)} className="mt-4 space-y-4">
-                    <div>
-                        <label htmlFor="quantity" className="block text-sm text-zinc-400">
-                            Quantity
-                        </label>
-                        <input
-                            type="number"
-                            id="quantity"
-                            className="mt-1 w-24 border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-zinc-100 focus:border-amber-500 focus:outline-none"
-                            {...register("quantity", {
-                                valueAsNumber: true,
-                                min: { value: 1, message: "Quantity must be at least 1" }
-                            })}
-                        />
-                        {errors.quantity && <p className="text-red-500 text-xs mt-1">{errors.quantity.message}</p>}
+                <div className="flex flex-col">
+                    <span className="w-fit rounded-full bg-[#eeecff] px-2.5 py-0.5 text-xs font-semibold text-[#2b1fa8]">
+                        {product.category}
+                    </span>
+                    <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-[#2b1fa8]">
+                        {product.name}
+                    </h1>
+                    <p className="mt-4 leading-relaxed text-slate-600">
+                        {product.description}
+                    </p>
+                    <p className="mt-6 text-3xl font-extrabold text-slate-900">
+                        ${product.price.toFixed(2)}
+                    </p>
 
-                    </div>
+                    <form
+                        onSubmit={handleSubmit(addToCart)}
+                        className="mt-8 space-y-4 border-t-2 border-[#14284b] pt-6"
+                    >
+                        <div>
+                            <label htmlFor="quantity" className="block text-sm font-semibold text-slate-700">
+                                Quantity
+                            </label>
+                            <input
+                                type="number"
+                                id="quantity"
+                                className="mt-1 w-24 rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 focus:border-[#503cfa] focus:outline-none focus:ring-2 focus:ring-[#503cfa]/30"
+                                {...register("quantity", {
+                                    valueAsNumber: true,
+                                    min: { value: 1, message: "Quantity must be at least 1" }
+                                })}
+                            />
+                            {errors.quantity && (
+                                <p className="mt-1 text-xs text-red-600">{errors.quantity.message}</p>
+                            )}
+                        </div>
 
-                    <div className="flex items-center justify-between border-t border-zinc-800 pt-4">
-                        <span className="text-sm text-zinc-400">
-                            Total:{" "}
-                            <span className="text-lg font-bold text-zinc-100">
-                                ${(product.price * (quantity || 0)).toFixed(2)}
+                        <div className="flex items-center justify-between gap-4">
+                            <span className="text-sm text-slate-600">
+                                Total:{" "}
+                                <span className="text-xl font-extrabold text-slate-900">
+                                    ${(product.price * (quantity || 0)).toFixed(2)}
+                                </span>
                             </span>
-                        </span>
-                        <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="bg-amber-500 px-5 py-2 text-sm font-semibold text-zinc-950 transition-colors hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-50"
-                        >
-                            {isSubmitting ? "Adding..." : "Add to Cart"}
-                        </button>
-                    </div>
-                    {errors.root && <p className="text-red-500 text-xs mt-1">{errors.root.message}</p>}
-                </form>
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="rounded-md bg-[#503cfa] px-6 py-3 font-semibold text-white shadow-[4px_4px_0_#2b1fa8] transition-transform hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0_#2b1fa8] focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-[#503cfa] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:hover:translate-x-0 disabled:hover:translate-y-0"
+                            >
+                                {isSubmitting ? "Adding..." : "Add to Cart"}
+                            </button>
+                        </div>
+
+                        {errors.root && (
+                            <p className="text-sm text-red-600">{errors.root.message}</p>
+                        )}
+                    </form>
+                </div>
             </div>
         </div>
     )
