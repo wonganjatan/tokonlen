@@ -21,6 +21,14 @@ export default function Cart() {
         fetchCart()
     }, [])
 
+    const handlePayment = async () => {
+        try {
+            alert("Hello World!")
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     if (loading) {
         return <p>Loading...</p>
     }
@@ -30,25 +38,35 @@ export default function Cart() {
     }
     
     return (
-        <div className="min-h-screen bg-zinc-950 px-6 py-10">
-            <div className="mx-auto max-w-3xl">
-                <h1 className="mb-6 text-2xl font-semibold tracking-tight text-zinc-100">
-                    Your Cart
-                </h1>
+        <div className="mx-auto max-w-3xl px-6 py-10">
+            <h1 className="mb-8 text-3xl font-extrabold tracking-tight text-[#2b1fa8]">
+                Your Cart
+            </h1>
 
-                <div className="divide-y divide-zinc-800 border border-zinc-800 bg-zinc-900">
-                    {cart.map(item => (
-                        <div key={item.cartItemId} className="flex items-center justify-between px-4 py-3">
-                            <div>
-                                <p className="text-sm text-zinc-100">Product #{item.productId}</p>
-                                <p className="text-xs text-zinc-500">
-                                    Added {new Date(item.createdAt).toLocaleDateString()}
-                                </p>
-                            </div>
-                            <span className="text-sm text-zinc-400">Qty: {item.quantity}</span>
+            <div className="divide-y divide-slate-200 overflow-hidden rounded-xl border border-slate-200 bg-white">
+                {cart.map(item => (
+                    <div key={item.cartItemId} className="flex items-center justify-between gap-4 px-5 py-4">
+                        <div>
+                            <p className="font-bold text-slate-900">Product #{item.productId}</p>
+                            <p className="text-xs text-slate-500">
+                                Added {new Date(item.createdAt).toLocaleDateString()}
+                            </p>
                         </div>
-                    ))}
-                </div>
+                        <span className="rounded-full bg-[#eeecff] px-3 py-1 text-sm font-semibold text-[#2b1fa8]">
+                            Qty: {item.quantity}
+                        </span>
+                    </div>
+                ))}
+            </div>
+
+            <div className="mt-6 flex justify-end border-t-2 border-[#14284b] pt-6">
+                <button
+                    type="button"
+                    onClick={handlePayment}
+                    className="rounded-md bg-[#503cfa] px-6 py-3 font-semibold text-white shadow-[4px_4px_0_#2b1fa8] transition-transform hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0_#2b1fa8] focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-[#503cfa] cursor-pointer"
+                >
+                    Pay
+                </button>
             </div>
         </div>
     )
