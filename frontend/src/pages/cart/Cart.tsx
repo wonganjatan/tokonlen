@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import type { CartItemResponse } from "../../types/Cart";
 import { cartsApi } from "../../api/carts";
+import { ordersApi } from "../../api/orders";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
     const [cart, setCart] = useState<CartItemResponse[] | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
+    const [isPaying, setIsPaying] = useState<boolean>(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchCart = async () => {
@@ -22,10 +26,14 @@ export default function Cart() {
     }, [])
 
     const handlePayment = async () => {
+        setIsPaying(true)
         try {
-            alert("Hello World!")
+            await ordersApi.create()
+            navigate("/orders")
         } catch (error) {
             console.error(error)
+        } finally {
+            setIsPaying(false)
         }
     }
 
@@ -59,13 +67,14 @@ export default function Cart() {
                 ))}
             </div>
 
-            <div className="mt-6 flex justify-end border-t-2 border-[#14284b] pt-6">
+            <div className="mt-6 flex items-center justify-end gap-4 border-t-2 border-[#14284b] pt-6">
                 <button
                     type="button"
                     onClick={handlePayment}
-                    className="rounded-md bg-[#503cfa] px-6 py-3 font-semibold text-white shadow-[4px_4px_0_#2b1fa8] transition-transform hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0_#2b1fa8] focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-[#503cfa] cursor-pointer"
+                    disabled={isPaying}
+                    className="cursor-pointer rounded-md bg-[#503cfa] px-6 py-3 font-semibold text-white shadow-[4px_4px_0_#2b1fa8] transition-transform hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0_#2b1fa8] focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-[#503cfa] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none"
                 >
-                    Pay
+                    {isPaying ? "Processing..." : "Pay"}
                 </button>
             </div>
         </div>
